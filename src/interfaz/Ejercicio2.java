@@ -9,6 +9,8 @@ import clases.Fraccionario;
 import clases.Indeterminacion;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +24,7 @@ public class Ejercicio2 extends javax.swing.JFrame {
      */
     public Ejercicio2() {
         initComponents(); 
-        cmdMixto.setEnabled(false);
+       
     }
 
     /**
@@ -51,8 +53,8 @@ public class Ejercicio2 extends javax.swing.JFrame {
         txtEnteroTres = new javax.swing.JTextField();
         cmbOperacionesBasicas = new javax.swing.JComboBox();
         cmdCalcular = new javax.swing.JButton();
-        cmdMixto = new javax.swing.JButton();
         cmdBorrar = new javax.swing.JButton();
+        cmbTotal = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,7 +130,7 @@ public class Ejercicio2 extends javax.swing.JFrame {
         jPanel1.add(txtEnteroTres, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 60, -1));
 
         cmbOperacionesBasicas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sumar", "Restar", "Multiplicar ", "Dividir" }));
-        jPanel1.add(cmbOperacionesBasicas, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, 110, -1));
+        jPanel1.add(cmbOperacionesBasicas, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 40, 110, -1));
 
         cmdCalcular.setFont(new java.awt.Font("Trebuchet MS", 2, 18)); // NOI18N
         cmdCalcular.setForeground(new java.awt.Color(102, 0, 51));
@@ -140,16 +142,6 @@ public class Ejercicio2 extends javax.swing.JFrame {
         });
         jPanel1.add(cmdCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 110, -1));
 
-        cmdMixto.setFont(new java.awt.Font("Trebuchet MS", 2, 18)); // NOI18N
-        cmdMixto.setForeground(new java.awt.Color(255, 153, 0));
-        cmdMixto.setText("Mixto");
-        cmdMixto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdMixtoActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cmdMixto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 110, -1));
-
         cmdBorrar.setFont(new java.awt.Font("Trebuchet MS", 2, 18)); // NOI18N
         cmdBorrar.setForeground(new java.awt.Color(255, 0, 0));
         cmdBorrar.setText("Borrar");
@@ -158,7 +150,10 @@ public class Ejercicio2 extends javax.swing.JFrame {
                 cmdBorrarActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 110, -1));
+        jPanel1.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 110, -1));
+
+        cmbTotal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "= ", "Fraccionario=" }));
+        jPanel1.add(cmbTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(501, 80, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,133 +171,94 @@ public class Ejercicio2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
-        int operacion = 0,numuno,numdos,demuno,demdos,entuno,entdos;Fraccionario f1,f2,f3=null; 
-        txtNumeradorTres.setText("");txtDenominadorTres.setText("");txtEnteroTres.setText(""); 
-        int sw=1; 
-        if(txtEnteroUno.getText().trim().isEmpty()){ 
-            JOptionPane.showMessageDialog(this,"Se requiere llenar los campos obligatorios","Error",JOptionPane.ERROR_MESSAGE);
-            txtEnteroUno.requestFocusInWindow();
-        }else if(txtEnteroDos.getText().trim().isEmpty()){ 
-            JOptionPane.showMessageDialog(this,"Se requiere llenar los campos obligatorios","Error",JOptionPane.ERROR_MESSAGE);
-            txtEnteroDos.requestFocusInWindow();
-        }else if(txtNumeradorUno.getText().trim().isEmpty()){ 
-            JOptionPane.showMessageDialog(this,"Se requiere llenar los campos obligatorios","Error",JOptionPane.ERROR_MESSAGE);
-            txtDenominadorUno.requestFocusInWindow();
-        }else if(txtNumeradorDos.getText().trim().isEmpty()){ 
-            JOptionPane.showMessageDialog(this,"Se requiere llenar los campos obligatorios","Error",JOptionPane.ERROR_MESSAGE);
-            txtNumeradorDos.requestFocusInWindow();
-        }else if(txtDenominadorUno.getText().trim().isEmpty()){ 
-            JOptionPane.showMessageDialog(this,"Se requiere llenar los campos obligatorios","Error",JOptionPane.ERROR_MESSAGE);
-            txtDenominadorUno.requestFocusInWindow();
-        }else if(txtDenominadorDos.getText().trim().isEmpty()){ 
-            JOptionPane.showMessageDialog(this,"Se requiere llenar los campos obligatorios","Error",JOptionPane.ERROR_MESSAGE);
-            txtNumeradorDos.requestFocusInWindow();
-        }else{ 
-          JOptionPane.showMessageDialog(this,"Campos requeridos agregados satisfactoriamente"); 
-          try{ 
-            entuno=Integer.parseInt(txtEnteroUno.getText());
-          }catch(NumberFormatException e){ 
-             JOptionPane.showMessageDialog(this,"La parte numero uno debe ser valida","Error",JOptionPane.ERROR_MESSAGE);
-              txtEnteroUno.requestFocusInWindow();
-                txtEnteroUno.selectAll();
-                sw=0;
-          } 
-          try{ 
-            entdos=Integer.parseInt(txtEnteroDos.getText());
-          }catch(NumberFormatException e){ 
-             JOptionPane.showMessageDialog(this,"La parte numero dos debes ser valida","Error",JOptionPane.ERROR_MESSAGE);
-              txtEnteroDos.requestFocusInWindow();
-                txtEnteroDos.selectAll();
-                sw=0;
-          } 
-          try{ 
-            numuno=Integer.parseInt(txtNumeradorUno.getText());
-          }catch(NumberFormatException e){ 
-            JOptionPane.showMessageDialog(this,"El numerador uno debe ser valido","Error",JOptionPane.ERROR_MESSAGE); 
-             txtNumeradorUno.requestFocusInWindow();
-                txtNumeradorUno.selectAll();
-                sw=0;
-          } 
-          try{ 
-            numdos=Integer.parseInt(txtNumeradorDos.getText()); 
-          }catch(NumberFormatException e){ 
-           JOptionPane.showMessageDialog(this,"El numerador dos debe ser valido","Error",JOptionPane.ERROR_MESSAGE); 
-             txtNumeradorDos.requestFocusInWindow();
-                txtNumeradorDos.selectAll();
-                sw=0;
-          } 
-          try{ 
-            demuno=Integer.parseInt(txtDenominadorUno.getText());
-          }catch(NumberFormatException e){ 
-            JOptionPane.showMessageDialog(this,"El denominador uno debe ser valido","Error",JOptionPane.ERROR_MESSAGE);
-             txtDenominadorUno.requestFocusInWindow();
-                txtDenominadorUno.selectAll();
-                sw=0;
-          } 
-          try{ 
-           demdos=Integer.parseInt(txtDenominadorDos.getText());
-          }catch(NumberFormatException e){ 
-           JOptionPane.showMessageDialog(this,"El denominador dos debe ser valido","Error",JOptionPane.ERROR_MESSAGE);
-            txtDenominadorDos.requestFocusInWindow();
-                txtDenominadorDos.selectAll();
-           sw=0;
-          } 
-          if(sw==1){ 
-           cmbOperacionesBasicas.getSelectedIndex(); 
-           entuno=Integer.parseInt(txtEnteroUno.getText()); 
-           entdos=Integer.parseInt(txtEnteroDos.getText()); 
-           numuno=Integer.parseInt(txtNumeradorUno.getText()); 
-           numdos=Integer.parseInt(txtNumeradorDos.getText()); 
-           demuno=Integer.parseInt(txtDenominadorUno.getText()); 
-           demdos=Integer.parseInt(txtDenominadorDos.getText());
-           try{ 
-            f1=new Fraccionario(entuno,numuno,demuno); 
-            f2=new Fraccionario(entdos,numdos,demdos); 
-            switch(operacion){ 
-                case 0: 
-                 f3=f1.Suma(f2); 
-                 break;
-                case 1: 
-                 f3=f1.Resta(f2); 
-                 break; 
-                case 2: 
-                 f3=f1.Multiplicacion(f2); 
-                 break;
-                case 3: 
-                 f3=f1.Division(f2); 
-                 break;
-            } 
-            txtEnteroTres.setText(""+f3.getEntero()); 
-            txtNumeradorTres.setText(""+f3.getNumerador()); 
-            txtDenominadorTres.setText(""+f3.getDenominador()); 
-            cmdMixto.setEnabled(true);
-           }catch(Indeterminacion e){ 
-              JOptionPane.showMessageDialog(null,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
-                     
-           }
-          }
+        int operacion,operacion2,numuno,demuno,entuno,numdos,demdos,entdos;
+        Fraccionario f1,f2,f3,f = null;
+        
+        if (txtNumeradorUno.getText().trim().isEmpty()){
+           JOptionPane.showMessageDialog(this, "Se requiere llenar los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+           txtNumeradorUno.requestFocusInWindow();
+       }else if (txtNumeradorDos.getText().trim().isEmpty()){
+           JOptionPane.showMessageDialog(this, "Se requiere llenar los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+           txtNumeradorDos.requestFocusInWindow();
+       }else if (txtDenominadorUno.getText().trim().isEmpty()){
+           JOptionPane.showMessageDialog(this, "Se requiere llenar los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+           txtDenominadorUno.requestFocusInWindow();
+       }else if (txtDenominadorDos.getText().trim().isEmpty()){
+           JOptionPane.showMessageDialog(this, "Se requiere llenar los campos obligatorios", "Error", JOptionPane.ERROR_MESSAGE);
+           txtDenominadorDos.requestFocusInWindow();
+       }else if(txtEnteroUno.getText().trim().isEmpty()){
+           JOptionPane.showMessageDialog(this,"Se requiere llenar los campos obligatorios","Error",JOptionPane.ERROR_MESSAGE);
+           txtEnteroUno.requestFocusInWindow();
+       }else if(txtEnteroDos.getText().trim().isEmpty()){
+           JOptionPane.showMessageDialog(this,"Se requiere llenar los campos obligatorios","Error",JOptionPane.ERROR_MESSAGE);
+           txtEnteroDos.requestFocusInWindow();
+       }else{ 
+            try {
+                JOptionPane.showMessageDialog(this,"Campos requeridos agregados satisfactoriamente");
+                operacion=cmbOperacionesBasicas.getSelectedIndex();
+                operacion2=cmbTotal.getSelectedIndex();
+                numuno=Integer.parseInt(txtNumeradorUno.getText());
+                numdos=Integer.parseInt(txtNumeradorDos.getText());
+                demuno=Integer.parseInt(txtDenominadorUno.getText());
+                demdos=Integer.parseInt(txtDenominadorDos.getText());
+                entuno=Integer.parseInt(txtEnteroUno.getText());
+                entdos=Integer.parseInt(txtEnteroDos.getText());
+                f1=new Fraccionario(numuno, demuno, entuno);
+                f2=new Fraccionario(numdos, demdos, entdos);
+                switch(operacion){
+                    case 0:
+                        f=f1.Suma(f2);
+                        txtNumeradorTres.setText(""+f.getNumerador());
+                        txtDenominadorTres.setText(""+f.getDenominador());
+                        txtEnteroTres.setText(""+f.getEntero());
+                        break;
+                        
+                    case 1:
+                        f=f1.Resta(f2);
+                        txtNumeradorTres.setText(""+f.getNumerador());
+                        txtDenominadorTres.setText(""+f.getDenominador());
+                        txtEnteroTres.setText(""+f.getEntero());
+                        break;
+                        
+                    case 2:
+                        f=f1.Multiplicacion(f2);
+                        txtNumeradorTres.setText(""+f.getNumerador());
+                        txtDenominadorTres.setText(""+f.getDenominador());
+                        txtEnteroTres.setText(""+f.getEntero());
+                        break;
+                        
+                    case 3:
+                        f=f1.Division(f2);
+                        txtNumeradorTres.setText(""+f.getNumerador());
+                        txtDenominadorTres.setText(""+f.getDenominador());
+                        txtEnteroTres.setText(""+f.getEntero());
+                        break;
+                }
+                switch(operacion2){
+                    case 0:
+                        txtNumeradorTres.setText(""+f.getNumerador());
+                        txtDenominadorTres.setText(""+f.getDenominador());
+                        txtEnteroTres.setText(""+f.getEntero());
+                        break;
+                        
+                    case 1:
+                        f3=f.FraccionMixta();
+                        txtNumeradorTres.setText(""+f3.getNumerador());
+                        txtDenominadorTres.setText(""+f3.getDenominador());
+                        txtEnteroTres.setText("");
+                }    } catch (Indeterminacion ex) {
+                Logger.getLogger(Ejercicio2.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+         
           
-        }
+              
+                     
+           
+       }   
+          
+        
     }//GEN-LAST:event_cmdCalcularActionPerformed
-
-    private void cmdMixtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMixtoActionPerformed
-          try {
-            // TODO add your handling code here:
-            Fraccionario f3, f;
-            int ent, n, d;
-            ent = Integer.parseInt(txtEnteroTres.getText());
-            n = Integer.parseInt(txtNumeradorTres.getText());
-            d = Integer.parseInt(txtDenominadorTres.getText());
-            f3 = new Fraccionario(ent, n, d);
-            f = f3.FraccionMixta();
-            txtEnteroTres.setText("");
-            txtNumeradorTres.setText("" + f.getNumerador());
-            txtDenominadorTres.setText("" + f.getDenominador());
-            cmdMixto.setEnabled(false);
-        } catch (Indeterminacion ex) {
-            Logger.getLogger(Ejercicio2.class.getName()).log(Level.SEVERE, null, ex); 
-        }
-    }//GEN-LAST:event_cmdMixtoActionPerformed
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
        txtEnteroUno.setText("");
@@ -316,8 +272,11 @@ public class Ejercicio2 extends javax.swing.JFrame {
         txtDenominadorTres.setText("");
         txtEnteroUno.setText("");
         cmbOperacionesBasicas.setSelectedIndex(0);
-        txtEnteroUno.requestFocusInWindow();
-        cmdMixto.setEnabled(false);
+        txtEnteroUno.requestFocusInWindow(); 
+        
+        
+        
+        
     }//GEN-LAST:event_cmdBorrarActionPerformed
 
     private void txtEnteroUnoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnteroUnoKeyTyped
@@ -405,9 +364,9 @@ public class Ejercicio2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cmbOperacionesBasicas;
+    private javax.swing.JComboBox cmbTotal;
     private javax.swing.JButton cmdBorrar;
     private javax.swing.JButton cmdCalcular;
-    private javax.swing.JButton cmdMixto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
